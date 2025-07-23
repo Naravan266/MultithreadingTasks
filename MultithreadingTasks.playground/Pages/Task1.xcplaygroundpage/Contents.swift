@@ -3,18 +3,18 @@
 import Foundation
 
 class Counter: @unchecked Sendable {
-    let queue = DispatchSerialQueue(label: ".com.app.serial")
+    let nsLock = NSLock()
     var counter = 0
     var value: Int {
-        queue.sync {
-            counter
-        }
+        nsLock.lock()
+        defer { nsLock.unlock()}
+        return counter
     }
 
     func increment() {
-        queue.sync {
-            counter += 1
-        }
+        nsLock.lock()
+        defer { nsLock.unlock()}
+        counter += 1
     }
 }
 
