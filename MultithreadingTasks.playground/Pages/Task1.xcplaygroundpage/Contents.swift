@@ -2,8 +2,7 @@
 
 import Foundation
 
-
-// I now got what is the issue here and how to use NSLock(). Due to the fact that both threads have uncontrolled access increment function, they use it both at the same time without any control. The simplest way to solve the issue is just to control the access to the increment function by setting lock when the function starts and removing it once it finishes doing its job.So basically in previous case I overthought the issue and made the solution unnecessary complex.
+// I now got what is the issue here and how to use NSLock(). Due to the fact that both threads have uncontrolled access to the increment function, they use it both at the same time without any control. The simplest way to solve the issue is just to control the access to the increment function by setting lock when the function starts and removing it once it finishes doing its job. So basically in previous case I overthought the issue and made the solution unnecessary complex by adding counter.
 
 class Counter: @unchecked Sendable {
     var value = 0
